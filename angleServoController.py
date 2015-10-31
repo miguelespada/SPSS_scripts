@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from OSC import OSCServer
+from OSC import OSCClient, OSCMessage
 import time
 import sys
 
