@@ -33,7 +33,7 @@ def sample(colorset, _size):
     idx_y = np.random.randint(colorset.shape[1], size=_size)
     print colorset.shape[0], colorset.shape[1]
     print idx_x, idx_y
-    return colorset[idx_y, idx_x, :]
+    return colorset[idx_x, idx_y, :]
 
 try:
   while(True):
