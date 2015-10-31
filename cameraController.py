@@ -19,7 +19,7 @@ client.connect( (args.ip, args.port) )
 
 COLOR_SIZE = 100
 
-cap = cv2.VideoCapture(args.capture)
+cap = cv2.VideoCapture(0)
 identifier = str(uuid.uuid4()) if not args.identifier else args.identifier
 
 width, height = cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH), cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
