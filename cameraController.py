@@ -17,20 +17,11 @@ from OSC import OSCClient, OSCMessage
 client = OSCClient()
 client.connect( (args.ip, args.port) )
 
-COLOR_SIZE = 100
-
 cap = cv2.VideoCapture(0)
+
 identifier = str(uuid.uuid4()) if not args.identifier else args.identifier
-
 width, height = cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH), cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
-center_roi_x, center_roi_y = int(width / 2 - 100 / 2), int(height / 2 - 100 / 2)
-pos_roi_x, pos_roi_y = int(width + (width/2-100/2)), int(height/3-100/2)
-pos_color_x, pos_color_y = width + (width/2 - COLOR_SIZE / 2), (height / 3 * 2 - COLOR_SIZE/2)
-n_pixels = width * height
 
-black_image = np.zeros((height, width * 2, 3), np.uint8)
-color_image = np.zeros((COLOR_SIZE, COLOR_SIZE, 3), np.uint8)
-end_color_y = pos_color_y + COLOR_SIZE
 
 print 
 print 'Identifier: ' + identifier
