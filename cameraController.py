@@ -53,9 +53,9 @@ try:
       sampling_pixels = sample(m_roi, 1000)
       color = np.mean(sampling_pixels, axis=0)
       
-      luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0]) / 255
+      luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
       try:
-        client.send( OSCMessage("/camera", [identifier, color[2], color[1], color[0], luminance] ) )
+        client.send( OSCMessage("/camera", [identifier, int(color[2]), int(color[1]), int(color[0]), int(luminance)] ) )
       except:
         pass
       time.sleep(1.0 / 30.0)
