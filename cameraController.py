@@ -58,6 +58,7 @@ try:
       time.sleep(1.0 / 30.0)
 
 except KeyboardInterrupt:
+  continue
 finally:
   print 'Releasing cam'
   cap.release()
