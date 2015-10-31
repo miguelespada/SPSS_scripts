@@ -39,7 +39,7 @@ import types
 server.handle_timeout = types.MethodType(handle_timeout, server)
 
 def servo_callback(path, tags, args, source):
-  print ("Moving from: ", args[0], " to: ", args[1], " in: ", arg[2], " s")
+  print ("Moving from: ", args[0], " to: ", args[1], " in: ", args[2], " s")
   goto(args[0], args[1], args[2])
 
 def quit_callback(path, tags, args, source):
