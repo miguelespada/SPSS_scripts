@@ -4,6 +4,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the OSC server')
 parser.add_argument('--port', type=int, default=8000, help='The port the OSC server is listening on')
 parser.add_argument('--identifier', type=str, default='', help='This is the identifier that will be sent to the visor')
+parser.add_argument('--samples', type=int, default=1000, help='Number of samples')
 args = parser.parse_args()
 
 
@@ -27,6 +28,7 @@ print
 print 'Identifier: ' + identifier
 print 'Captured image size: %d, %d' % (width, height)
 print 'Sending to %s:%d' % (args.ip, args.port)
+print 'Samples %d' % (args.samples)
 print
 
 def sample(colorset, _size):
@@ -40,7 +42,7 @@ try:
       if not ret:
           continue
 
-      sampling_pixels = sample(frame, 1000)
+      sampling_pixels = sample(frame, args.samples)
       color = np.mean(sampling_pixels, axis=0)
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
