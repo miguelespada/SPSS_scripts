@@ -3,7 +3,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the OSC server')
 parser.add_argument('--port', type=int, default=8000, help='The port the OSC server is listening on')
-parser.add_argument('--identifier', type=str, default=0, help='This is the identifier that will be sent to the visor')
+parser.add_argument('--identifier', type=int, default=0, help='This is the identifier that will be sent to the visor')
 parser.add_argument('--samples', type=int, default=1000, help='Number of samples')
 args = parser.parse_args()
 
