@@ -54,7 +54,10 @@ try:
       color = np.mean(sampling_pixels, axis=0)
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0]) / 255
-      client.send( OSCMessage("/camera", [identifier, color[2], color[1], color[0], luminance] ) )
+      try:
+        client.send( OSCMessage("/camera", [identifier, color[2], color[1], color[0], luminance] ) )
+      except:
+        pass
       time.sleep(1.0 / 30.0)
 
 except KeyboardInterrupt:
