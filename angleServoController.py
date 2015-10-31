@@ -21,12 +21,23 @@ def goto(init, end, s):
   inc = abs(init - end) / steps
   for i in range(int(steps)):
     pos = inc * i
+
     if init > end:
-      p.ChangeDutyCycle(angle(init - pos))
+      a = angle(init - pos)
     else:
-      p.ChangeDutyCycle(angle(init + pos))
+      a = angle(init + pos)
+
+    try:
+      client.send( OSCMessage("/angle", [0, int(a)] ) )
+    except:
+      pass
+    
+    p.ChangeDutyCycle(a)
     time.sleep(0.05)
 
+
+client = OSCClient()
+client.connect( ("192.168.1.33", 8000) )
 
 server = OSCServer( ("192.168.1.52", 7110) )
 server.timeout = 0
