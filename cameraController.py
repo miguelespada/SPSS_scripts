@@ -3,14 +3,13 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the OSC server')
 parser.add_argument('--port', type=int, default=8000, help='The port the OSC server is listening on')
-parser.add_argument('--identifier', type=str, default='', help='This is the identifier that will be sent to the visor')
+parser.add_argument('--identifier', type=str, default=0, help='This is the identifier that will be sent to the visor')
 parser.add_argument('--samples', type=int, default=1000, help='Number of samples')
 args = parser.parse_args()
 
 
 import numpy as np
 import cv2
-import uuid
 import time
 from OSC import OSCClient, OSCMessage
 
@@ -20,9 +19,7 @@ client.connect( (args.ip, args.port) )
 
 cap = cv2.VideoCapture(0)
 
-identifier = str(uuid.uuid4()) if not args.identifier else args.identifier
 width, height = cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH), cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
-
 
 print 
 print 'Identifier: ' + identifier
@@ -34,6 +31,7 @@ print
 def sample(colorset, _size):
     idx_x = np.random.randint(colorset.shape[0], size=_size)
     idx_y = np.random.randint(colorset.shape[1], size=_size)
+    print idx_x, idx_y
     return colorset[idx_y, idx_x, :]
 
 try:
@@ -42,7 +40,7 @@ try:
       if not ret:
           continue
 
-      sampling_pixels = sample(frame, 1000)
+      sampling_pixels = sample(frame, args.samples)
       color = np.mean(sampling_pixels, axis=0)
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
