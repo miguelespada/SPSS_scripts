@@ -22,7 +22,7 @@ cap = cv2.VideoCapture(0)
 width, height = cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH), cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
 
 print 
-print 'Identifier: ' + args.identifier
+print 'Identifier: %d', args.identifier
 print 'Captured image size: %d, %d' % (width, height)
 print 'Sending to %s:%d' % (args.ip, args.port)
 print 'Samples %d' % (args.samples)
