@@ -22,7 +22,7 @@ cap = cv2.VideoCapture(0)
 width, height = cap.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH), cap.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)
 
 print 
-print 'Identifier: ' + identifier
+print 'Identifier: ' + args.identifier
 print 'Captured image size: %d, %d' % (width, height)
 print 'Sending to %s:%d' % (args.ip, args.port)
 print 'Samples %d' % (args.samples)
@@ -45,7 +45,7 @@ try:
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
       try:
-        client.send( OSCMessage("/camera", [identifier, int(color[2]), int(color[1]), int(color[0]), int(luminance)] ) )
+        client.send( OSCMessage("/camera", [args.identifier, int(color[2]), int(color[1]), int(color[0]), int(luminance)] ) )
       except:
         pass
       time.sleep(1.0 / 30.0)
