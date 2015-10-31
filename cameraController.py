@@ -49,8 +49,7 @@ try:
       if not ret:
           continue
 
-      m_roi = frame[center_roi_y : center_roi_y + 100, center_roi_x : center_roi_x + 100]
-      sampling_pixels = sample(m_roi, 1000)
+      sampling_pixels = sample(frame, 1000)
       color = np.mean(sampling_pixels, axis=0)
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
