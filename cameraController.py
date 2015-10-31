@@ -42,7 +42,7 @@ try:
       if not ret:
           continue
 
-      sampling_pixels = sample(frame, args.samples)
+      sampling_pixels = sample(frame, 1000)
       color = np.mean(sampling_pixels, axis=0)
       
       luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
