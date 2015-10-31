@@ -28,7 +28,7 @@ def goto(init, end, s):
     time.sleep(0.05)
 
 
-server = OSCServer( ("localhost", 7110) )
+server = OSCServer( ("192.168.1.52", 7110) )
 server.timeout = 0
 run = True
 
