@@ -24,16 +24,16 @@ def goto(init, end, s):
     pos = inc * i
 
     if init > end:
-      a = angle(init - pos)
+      a = init - pos
     else:
-      a = angle(init + pos)
+      a = init + pos
 
     try:
       client.send( OSCMessage("/angle", [0, int(a)] ) )
     except:
       pass
     
-    p.ChangeDutyCycle(a)
+    p.ChangeDutyCycle(angle(a))
     time.sleep(0.05)
 
 
