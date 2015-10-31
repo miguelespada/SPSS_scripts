@@ -31,8 +31,6 @@ print
 def sample(colorset, _size):
     idx_x = np.random.randint(colorset.shape[0], size=_size)
     idx_y = np.random.randint(colorset.shape[1], size=_size)
-    print colorset.shape[0], colorset.shape[1]
-    print idx_x, idx_y
     return colorset[idx_x, idx_y, :]
 
 try:
