@@ -38,6 +38,9 @@ def duty(a):
 
 def goto(end, s):
   global angle
+
+  print "Moving from: ", angle, " to: ", end, " in: ", s, " s"
+
   init = angle
   steps = s / 0.05
   inc = abs(init - end) / steps
@@ -72,8 +75,7 @@ import types
 server.handle_timeout = types.MethodType(handle_timeout, server)
 
 def servo_callback(path, tags, args, source):
-  print ("Moving from: ", angle, " to: ", args[0], " in: ", args[1], " s")
-  goto(args[1], args[2])
+  goto(args[0], args[1])
 
 def quit_callback(path, tags, args, source):
   global run
