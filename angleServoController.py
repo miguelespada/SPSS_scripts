@@ -47,13 +47,18 @@ def goto(end, s):
   end = end * 1.0
   steps = s / SERVO_DELTA_TIME
   inc = abs(init - end) / steps
-  for i in range(int(steps)):
+  for i in range(int(steps) + 1):
     pos = inc * i
 
     if init > end:
       a = init - pos
     else:
       a = init + pos
+    
+    if a < 0:
+      a = 0
+    if a > SERVO_MAX_ANGLE:
+      a = SERVO_MAX_ANGLE
 
     angle = a
     try:
