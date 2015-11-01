@@ -7,6 +7,7 @@ parser.add_argument('--local_port', type=int, default=7110, help='The port the O
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the remove OSC server')
 parser.add_argument('--port', type=int, default=8001, help='The port the remote OSC server ')
 parser.add_argument('--identifier', type=int, default=0, help='This is the identifier that will be sent to the visor')
+parser.add_argument('--delta_time', type=float, default=0.05, help='The port the remote OSC server ')
 args = parser.parse_args()
 
 
@@ -14,6 +15,7 @@ print
 print 'Identifier: %d' % args.identifier
 print 'Listening to %s:%d' % (args.local_ip, args.local_port)
 print 'Sending to %s:%d' % (args.ip, args.port)
+print 'Sending to %f' % (args.delta_time)
 print
 
 import RPi.GPIO as GPIO
@@ -25,7 +27,7 @@ import sys
 SERVO_MAX = 11.9
 SERVO_MIN = 2.5
 SERVO_MAX_ANGLE = 180.0
-SERVO_DELTA_TIME = 0.1
+SERVO_DELTA_TIME = args.delta_time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 p = GPIO.PWM(18, 50)
