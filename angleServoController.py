@@ -38,7 +38,7 @@ def duty(a):
 
 def goto(end, s):
   global angle
-  if abs(end - angle < 1:
+  if abs(end - angle) < 1:
     return
 
   print "Moving from: ", angle, " to: ", end, " in: ", s, " s"
