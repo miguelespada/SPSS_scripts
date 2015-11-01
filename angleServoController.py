@@ -7,6 +7,7 @@ parser.add_argument('--local_port', type=int, default=7110, help='The port the O
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the remove OSC server')
 parser.add_argument('--port', type=int, default=8001, help='The port the remote OSC server ')
 parser.add_argument('--identifier', type=int, default=0, help='This is the identifier that will be sent to the visor')
+args = parser.parse_args()
 
 
 print 
