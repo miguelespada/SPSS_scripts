@@ -41,7 +41,8 @@ def goto(end, s):
 
   print "Moving from: ", angle, " to: ", end, " in: ", s, " s"
 
-  init = angle
+  init = angle * 1.0
+  end = end * 1.0
   steps = s / SERVO_DELTA_TIME
   inc = abs(init - end) / steps
   for i in range(int(steps)):
