@@ -1,3 +1,19 @@
+import argparse
+
+
+parser.add_argument('--local_ip', default='192.168.1.11', help='The ip of the local OSC')
+parser.add_argument('--local_port', type=int, default=7110, help='The port the OSC server is listening to')
+parser.add_argument('--ip', default='127.0.0.1', help='The ip of the remove OSC server')
+parser.add_argument('--port', type=int, default=8001, help='The port the remote OSC server ')
+parser.add_argument('--identifier', type=int, default=0, help='This is the identifier that will be sent to the visor')
+
+
+print 
+print 'Identifier: %d' % args.identifier
+print 'Listening to %s:%d' % (args.local_ip, args.local_port)
+print 'Sending to %s:%d' % (args.ip, args.port)
+print
+
 import RPi.GPIO as GPIO
 from OSC import OSCServer
 from OSC import OSCClient, OSCMessage
@@ -38,9 +54,9 @@ def goto(init, end, s):
 
 
 client = OSCClient()
-client.connect( ("192.168.1.33", 8001) )
+client.connect( (args.ip, args.port) )
 
-server = OSCServer( ("192.168.1.52", 7110) )
+server = OSCServer( (args.local_ip, args.local_port) )
 server.timeout = 0
 run = True
 

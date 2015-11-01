@@ -2,7 +2,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--ip', default='127.0.0.1', help='The ip of the OSC server')
-parser.add_argument('--port', type=int, default=8000, help='The port the OSC server is listening on')
+parser.add_argument('--port', type=int, default=8001, help='The port the OSC server is listening on')
 parser.add_argument('--identifier', type=int, default=0, help='This is the identifier that will be sent to the visor')
 parser.add_argument('--samples', type=int, default=1000, help='Number of samples')
 args = parser.parse_args()
@@ -42,9 +42,8 @@ try:
       sampling_pixels = sample(frame, args.samples)
       color = np.mean(sampling_pixels, axis=0)
       
-      luminance = (0.2126 * color[2] + 0.7152 * color[1] + 0.0722 * color[0])
       try:
-        client.send( OSCMessage("/camera", [args.identifier, int(color[2]), int(color[1]), int(color[0]), int(luminance)] ) )
+        client.send( OSCMessage("/camera", [args.identifier, int(color[2]), int(color[1]), int(color[0])] ) )
       except:
         pass
       time.sleep(1.0 / 30.0)
