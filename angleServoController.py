@@ -25,7 +25,7 @@ import sys
 SERVO_MAX = 11.9
 SERVO_MIN = 2.5
 SERVO_MAX_ANGLE = 180.0
-
+SERVO_DELTA_TIME = 0.01
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 p = GPIO.PWM(18, 50)
@@ -42,7 +42,7 @@ def goto(end, s):
   print "Moving from: ", angle, " to: ", end, " in: ", s, " s"
 
   init = angle
-  steps = s / 0.05
+  steps = s / SERVO_DELTA_TIME
   inc = abs(init - end) / steps
   for i in range(int(steps)):
     pos = inc * i
@@ -58,7 +58,7 @@ def goto(end, s):
     except:
       pass
     p.ChangeDutyCycle(duty(a))
-    time.sleep(0.05)
+    time.sleep(SERVO_DELTA_TIME)
 
 
 client = OSCClient()
