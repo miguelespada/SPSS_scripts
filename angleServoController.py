@@ -31,7 +31,7 @@ GPIO.setup(18, GPIO.OUT)
 p = GPIO.PWM(18, 50)
 
 angle = 0
-p.start(servo_pos)
+p.start(angle)
 
 def duty(a):
   return (a / SERVO_MAX_ANGLE) * (SERVO_MAX - SERVO_MIN) + SERVO_MIN
