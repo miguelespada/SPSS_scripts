@@ -24,18 +24,21 @@ import sys
 
 SERVO_MAX = 11.9
 SERVO_MIN = 2.5
-SERVO_ANGLE = 180.0
+SERVO_MAX_ANGLE = 180.0
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 p = GPIO.PWM(18, 50)
-p.start(5)
 
-def angle(a):
-  return (a / SERVO_ANGLE) * (SERVO_MAX - SERVO_MIN) + SERVO_MIN
+angle = 0
+p.start(servo_pos)
 
-def goto(init, end, s):
-  p.ChangeDutyCycle(angle(init))
+def duty(a):
+  return (a / SERVO_MAX_ANGLE) * (SERVO_MAX - SERVO_MIN) + SERVO_MIN
+
+def goto(end, s):
+  global angle
+  init = angle
   steps = s / 0.05
   inc = abs(init - end) / steps
   for i in range(int(steps)):
@@ -46,12 +49,12 @@ def goto(init, end, s):
     else:
       a = init + pos
 
+    angle = a
     try:
-      client.send( OSCMessage("/angle", [0, int(a)] ) )
+      client.send( OSCMessage("/angle", [args.identifier, int(angle), 1] ) )
     except:
       pass
-    
-    p.ChangeDutyCycle(angle(a))
+    p.ChangeDutyCycle(duty(a))
     time.sleep(0.05)
 
 
@@ -69,8 +72,8 @@ import types
 server.handle_timeout = types.MethodType(handle_timeout, server)
 
 def servo_callback(path, tags, args, source):
-  print ("Moving from: ", args[0], " to: ", args[1], " in: ", args[2], " s")
-  goto(args[0], args[1], args[2])
+  print ("Moving from: ", angle, " to: ", args[0], " in: ", args[1], " s")
+  goto(args[1], args[2])
 
 def quit_callback(path, tags, args, source):
   global run
@@ -88,6 +91,7 @@ try:
   while run:
     time.sleep(0.3)
     each_frame()
+    client.send( OSCMessage("/angle", [args.identifier, int(angle), 0] ) )
   print "quiting..."
 except KeyboardInterrupt:
   print "quiting..."
