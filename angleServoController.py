@@ -38,7 +38,7 @@ def goto(init, end, s):
 
 
 client = OSCClient()
-client.connect( ("192.168.1.33", 8000) )
+client.connect( ("192.168.1.33", 8001) )
 
 server = OSCServer( ("192.168.1.52", 7110) )
 server.timeout = 0
