@@ -93,7 +93,10 @@ try:
   while run:
     time.sleep(0.3)
     each_frame()
-    client.send( OSCMessage("/angle", [args.identifier, int(angle), 0] ) )
+    try:
+      client.send( OSCMessage("/angle", [args.identifier, int(angle), 0] ) )
+    except:
+      pass
   print "quiting..."
 except KeyboardInterrupt:
   print "quiting..."
